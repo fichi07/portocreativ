@@ -1,0 +1,15 @@
+.btn-primary {
+    @apply font-bold text-[26px] leading-[39px] rounded-[30px] p-[30px_40px] bg-portto-purple w-fit transition-all duration-300 hover:shadow-[0_10px_20px_0_#4920E5] !important;
+}
+
+.btn-secondary {
+    @apply bg-portto-light-gold font-bold text-lg p-[14px_30px] w-fit rounded-full transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280] !important;
+}
+
+.btn-black {
+    @apply bg-portto-black font-bold text-lg text-white rounded-full p-[14px_30px] w-fit transition-all duration-300 hover:bg-white hover:text-portto-black hover:ring hover:ring-portto-black !important;
+}
+
+.top-link.active {
+    @apply font-semibold border-b-[3px] text-portto-light-gold;
+}
