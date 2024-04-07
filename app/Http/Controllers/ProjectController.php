@@ -12,7 +12,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+         return Inertia('Admin/Project/Index'); //
     }
 
     /**
@@ -20,7 +20,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+       return Inertia('Admin/Project/Create');  //
     }
 
     /**

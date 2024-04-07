@@ -1,0 +1,12 @@
+.input-primary {
+    @apply bg-white focus:ring-[3px] focus:ring-portto-green placeholder:text-[#878C9C] !important;
+}
+
+.input-error {
+    @apply ring ring-red-600;
+}
+
+.input-primary-outline {
+    @apply bg-white focus:bg-white focus:ring-portto-green !important;
+    @apply file:text-white file:rounded-md file:p-2 !important;
+}
