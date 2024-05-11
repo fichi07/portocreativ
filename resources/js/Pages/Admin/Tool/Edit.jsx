@@ -7,13 +7,11 @@ import { useForm } from "@inertiajs/inertia-react";
 import React, { useState } from "react";
 import { Head } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
+import { Inertia } from "@inertiajs/inertia";
 
-export default function Index({ auth }) {
-    const { setData, post, processing, errors } = useForm({
-        name: "",
-        category: "",
-        cover: "",
-        about: "",
+export default function Index({ auth, tool }) {
+    const { setData, data, processing, errors } = useForm({
+        ...tool,
     });
     const ohandleOnChange = (event) => {
         setData(
@@ -23,6 +21,7 @@ export default function Index({ auth }) {
                 : event.target.value
         );
     };
+
     const options = [
         { value: "Website Development", label: "Website Development" },
         { value: "UI/UX", label: "UI/UX" },
@@ -30,8 +29,13 @@ export default function Index({ auth }) {
     ];
     const submit = (e) => {
         e.preventDefault();
-
-        post(route("admin.dashboard.project.store"));
+        if (data.logo === tool.logo) {
+            delete data.logo;
+        }
+        Inertia.post(route("admin.dashboard.tool.update", tool.id), {
+            _method: "PUT",
+            ...data,
+        });
     };
     return (
         <>
@@ -47,7 +51,7 @@ export default function Index({ auth }) {
                                 onSubmit={submit}
                             >
                                 <h1 className="text-indigo-950 text-3xl font-bold ">
-                                    Add New Project
+                                    Add New tool
                                 </h1>{" "}
                                 <label className="flex flex-col gap-y-2 font-semibold">
                                     <span className="text-black font-bold text-lg">
@@ -57,9 +61,8 @@ export default function Index({ auth }) {
                                         type="text"
                                         name="name"
                                         placeholder="Write name"
-                                        isFocused={true}
+                                        defaultValue={tool.name}
                                         handleChange={ohandleOnChange}
-                                        required
                                     ></TextInput>
                                     <InputError
                                         message={errors.name}
@@ -76,46 +79,18 @@ export default function Index({ auth }) {
                                 </label>
                                 <label className="flex flex-col gap-[10px] font-semibold">
                                     <span className="text-black font-bold text-lg">
-                                        Category
+                                        Logo
                                     </span>
-                                    <select
-                                        name="category"
-                                        onChange={ohandleOnChange}
-                                        className="font-semibold text-gray-500 rounded-2xl py-[13px] px-7 w-full appearance-none outline-none placeholder:font-normal placeholder:text-base "
-                                        required
-                                    >
-                                        <option value="">Pilih opsi</option>
-                                        {options.map((option) => (
-                                            <option key={option.value}>
-                                                {option.label}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <InputError
-                                        message={errors.category}
-                                        className="mt-2"
+                                    <img
+                                        src={`/storage/${tool.logo}`}
+                                        alt=""
+                                        className="w-40"
                                     />
-
-                                    {/*   <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                className="bg-white rounded-full p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C]"
-                                placeholder="What’s your email address"
-                                required
-                            /> */}
-                                </label>
-                                <label className="flex flex-col gap-[10px] font-semibold">
-                                    <span className="text-black font-bold text-lg">
-                                        Cover
-                                    </span>
                                     <TextInput
                                         type="file"
-                                        name="cover"
+                                        name="logo"
                                         placeholder="Input Your Cover"
-                                        isFocused={true}
                                         handleChange={ohandleOnChange}
-                                        required
                                     ></TextInput>
                                     {/*   <input
                                 type="email"
@@ -128,22 +103,20 @@ export default function Index({ auth }) {
                                 </label>
                                 <label className="flex flex-col gap-[10px] font-semibold">
                                     <span className="text-black font-bold text-lg">
-                                        About
+                                        Tagline
                                     </span>
                                     <TextInput
-                                        type="textarea"
-                                        name="about"
-                                        placeholder="About your a whole project"
-                                        isFocused={true}
+                                        type="text"
+                                        name="tagline"
+                                        placeholder="About your a whole tool"
+                                        defaultValue={tool.tagline}
                                         handleChange={ohandleOnChange}
-                                        required
-                                        rows={5}
                                     ></TextInput>
                                     {/*  <textarea
                                 name="brief"
                                 id="brief"
                                 className="rounded-[20px] p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C] h-[250px]"
-                                placeholder="Brief me your a whole project"
+                                placeholder="Brief me your a whole tool"
                                 required
                             ></textarea> */}
                                 </label>
@@ -152,7 +125,7 @@ export default function Index({ auth }) {
                                     processing={processing}
                                     className="font-bold text-lg text-white bg-portto-purple rounded-[20px] p-5 transition-all duration-300 hover:shadow-[0_10px_20px_0_#4920E5]"
                                 >
-                                    Upload Project
+                                    Save
                                 </PrimaryButton>
                             </form>
                         </div>

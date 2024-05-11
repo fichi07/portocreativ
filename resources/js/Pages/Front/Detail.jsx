@@ -3,6 +3,7 @@ import Topbar from "@/Layouts/Template/Topbar";
 import Faq from "@/Components/Faq";
 import { Head } from "@inertiajs/react";
 import React, { useEffect } from "react";
+import Footer from "@/Components/Footer";
 
 export default function Detail() {
     useEffect(() => {
@@ -474,7 +475,9 @@ export default function Detail() {
                         </div>
                     </div>
                 </section>
+
                 <Faq></Faq>
+                <Footer></Footer>
             </Authenticated>
         </>
     );

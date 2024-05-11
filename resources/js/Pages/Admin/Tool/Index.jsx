@@ -5,7 +5,7 @@ import FlashMessage from "@/Components/FlashMessage";
 import { Link, Head, useForm } from "@inertiajs/react";
 import React from "react";
 
-export default function Index({ auth, flashMessage, projects }) {
+export default function Index({ auth, flashMessage, tools }) {
     const { delete: destroy, put } = useForm();
     return (
         <>
@@ -17,16 +17,14 @@ export default function Index({ auth, flashMessage, projects }) {
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-10 flex flex-col">
                             <div className="p-6 text-gray-900">
                                 <Link
-                                    href={route(
-                                        "admin.dashboard.project.create"
-                                    )}
+                                    href={route("admin.dashboard.tool.create")}
                                 >
                                     <PrimaryButton
                                         type="button"
                                         variant="black"
                                         className="text-white bg-black"
                                     >
-                                        Insert New Project
+                                        Insert New Tools
                                     </PrimaryButton>
                                 </Link>
                                 {flashMessage?.message && (
@@ -36,63 +34,61 @@ export default function Index({ auth, flashMessage, projects }) {
                                 )}
                             </div>
                             <hr className="my-10" />
-                            {projects.map((projects) => (
+                            {tools.map((tool) => (
                                 <div
                                     className="flex flex-col gap-y-5"
-                                    key={projects.id}
+                                    key={tool.id}
                                 >
                                     <div className="item-project flex flex-row items-center mb-5 justify-between">
                                         <div className="flex flex-row items-center gap-x-5">
                                             <img
-                                                src={`/storage/${projects.cover}`}
+                                                src={`/storage/${tool.logo}`}
                                                 alt=""
                                                 className="object-cover w-[160px] h-[100px] rounded-2xl"
                                             />
                                             <div className="flex flex-col gap-y-1 ">
                                                 <h3 className="font-bold text-xl">
-                                                    {projects.name}
+                                                    {tool.name}
                                                 </h3>
                                                 <p className="text-sm text-slate-400">
-                                                    {projects.category}
+                                                    {tool.tagline}
                                                 </p>
                                             </div>
                                         </div>
-                                        {!projects.deleted_at && (
-                                            <div className="flex flex-row items-end gap-x-2">
-                                                <Link
-                                                    href={route(
-                                                        "admin.dashboard.projecttol.assign.tool",
-                                                        projects.id
-                                                    )}
+                                        <div className="flex flex-row items-end gap-x-2">
+                                            <Link
+                                                href={route(
+                                                    "admin.dashboard.project.edit",
+                                                    tool.id
+                                                )}
+                                            >
+                                                <PrimaryButton
+                                                    type="button"
+                                                    variant="black"
                                                 >
-                                                    <PrimaryButton
-                                                        type="button"
-                                                        variant="black"
-                                                    >
-                                                        Add Tools
-                                                    </PrimaryButton>
-                                                </Link>
-                                                <Link
-                                                    href={route(
-                                                        "admin.dashboard.projectscreenshot.create",
-                                                        projects.id
-                                                    )}
+                                                    Add Tools
+                                                </PrimaryButton>
+                                            </Link>
+                                            <Link
+                                                href={route(
+                                                    "admin.dashboard.project.edit",
+                                                    tool.id
+                                                )}
+                                            >
+                                                <PrimaryButton
+                                                    type="button"
+                                                    variant="black"
                                                 >
-                                                    <PrimaryButton
-                                                        type="button"
-                                                        variant="black"
-                                                    >
-                                                        Add Screenshot
-                                                    </PrimaryButton>
-                                                </Link>
-                                            </div>
-                                        )}
+                                                    Add Screenshot
+                                                </PrimaryButton>
+                                            </Link>
+                                        </div>
                                         <div className="flex flex-row items-center w-auto gap-x-2">
-                                            {!projects.deleted_at && (
+                                            {!tool.deleted_at && (
                                                 <Link
                                                     href={route(
-                                                        "admin.dashboard.project.edit",
-                                                        projects.id
+                                                        "admin.dashboard.tool.edit",
+                                                        tool.id
                                                     )}
                                                 >
                                                     <PrimaryButton
@@ -106,17 +102,17 @@ export default function Index({ auth, flashMessage, projects }) {
                                             )}
                                             <div
                                                 onClick={() => {
-                                                    projects.deleted_at
+                                                    tool.deleted_at
                                                         ? put(
                                                               route(
-                                                                  "admin.dashboard.project.restore",
-                                                                  projects.id
+                                                                  "admin.dashboard.tool.restore",
+                                                                  tool.id
                                                               )
                                                           )
                                                         : destroy(
                                                               route(
-                                                                  "admin.dashboard.project.destroy",
-                                                                  projects.id
+                                                                  "admin.dashboard.tool.destroy",
+                                                                  tool.id
                                                               )
                                                           );
                                                 }}
@@ -126,7 +122,7 @@ export default function Index({ auth, flashMessage, projects }) {
                                                     variant="delete"
                                                     className="py-3 px-5 rounded-full"
                                                 >
-                                                    {projects.deleted_at
+                                                    {tool.deleted_at
                                                         ? "Restore"
                                                         : "Delete"}
                                                 </PrimaryButton>
