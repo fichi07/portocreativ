@@ -5,6 +5,10 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectToolController;
+use App\Http\Controllers\ProjectScreenshotController;
+use App\Http\Controllers\ToolController;
+use App\Models\Tool;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +29,25 @@ Route::get('/book',[FrontController::class, 'book'])->name('front.book');
 
 Route::middleware('auth')->prefix('dashboard')->name('admin.dashboard.')->group(function(){
     Route::get('/',[DashboardController::class,'index'])->name('index');
-    Route::get('project',[ProjectController::class,'index'])->name('project.index');
-    Route::get('project/create',[ProjectController::class,'create'])->name('project.create');
+
+    Route::resource('project', ProjectController::class);
+    Route::put('project/{project}/restore', [ProjectController::class,'restore'])->name('project.restore');
+
+    Route::resource('tool', ToolController::class);
+    Route::put('tool/{tool}/restore', [ToolController::class,'restore'])->name('tool.restore');
+
+  /*   Route::delete('/project-tools/{id}', [ProjectToolController::class, 'destroy'])->name('project-tools.destroy'); */
+    Route::resource('projecttool', ProjectToolController::class);
+    Route::get('/projecttool/create/{project}', [ProjectToolController::class, 'create'])->name('projecttol.assign.tool');
+    Route::post('/projecttool/create/save/{project}', [ProjectToolController::class, 'store'])->name('projecttool.assign.tool.store');
+    
+    Route::resource('screenshoot', ProjectScreenshotController::class);
+  
+
+
+    Route::get('/screenshoot/create/{project}', [ProjectScreenshotController::class, 'create'])->name('projectscreenshot.create');
+     Route::post('/screenshoot/create/save/{project}', [ProjectScreenshotController::class, 'store'])->name('projectscreenshot.create.store');
+
 });
 
 /*     Route::get('/dashboard', function () {

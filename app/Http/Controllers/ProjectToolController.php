@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProjectTool;
+use App\Models\Tool;
+use App\Models\Project;
+use App\Http\Requests\Admin\Project_tool\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectToolController extends Controller
 {
@@ -12,23 +16,51 @@ class ProjectToolController extends Controller
      */
     public function index()
     {
-        //
+        
+        $tools=Tool::withTrashed()->orderBy('deleted_at','desc')->get();
+        return Inertia('Admin/Project_tool/Index',[
+            'tools'=> $tools
+        ]);
+       ////
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request, Project $project, Tool $tool)
     {
-        //
+            // Mengambil daftar alat yang belum ditugaskan ke proyek tertentu
+       $tools=Tool::withTrashed()->orderBy('deleted_at','desc')->get();
+        // Mengambil daftar alat yang sudah ditugaskan ke proyek tertentu
+
+         $assignedTools = $project->tools()->get();
+    return Inertia('Admin/Project_tool/Create', [
+         'assignedTools' => $assignedTools,
+        'tools' => $tools,
+        'project' => $project, 
+       /*  'projecttool'=>$projecttool */ // Mengirim data tools ke view Inertia.
+    ]); //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Project $project)
     {
-        //
+            $validated = $request->validate([
+            'tool_id' => 'required|integer', // assuming 'tools' is your database table for tools
+        ]);
+
+        // Add the project_id from the route model binding
+        $validated['project_id'] = $project->id; 
+        // Create the ProjectTool
+        $projectTool = ProjectTool::updateOrCreate($validated);
+
+        // Redirect with success message
+        return redirect(route('admin.dashboard.projecttol.assign.tool', $project->id))->with([
+            'message' => "ProjectTool inserted successfully",
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -58,8 +90,21 @@ class ProjectToolController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProjectTool $projectTool)
+   public function destroy(ProjectTool $projecttool)
     {
-        //
+        $projecttool->delete(); // Menghapus kaitan antara alat dan proyek
+
+        return back()->with([
+            'message' => "ProjectTool Deleted successfully",
+            'type' => 'success'
+        ]);
+    }
+       public function restore($projecttool)
+    {
+        ProjectTool::withTrashed()->find($projecttool)->restore();
+       return redirect(route('admin.dashboard.tool.index'))->with([
+         'message' => "Tool Restored successfully",
+            'type' => 'success'
+       ]);//
     }
 }

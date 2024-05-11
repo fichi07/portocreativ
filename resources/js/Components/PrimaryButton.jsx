@@ -3,7 +3,13 @@ import React from "react";
 
 PrimaryButton.propTypes = {
     type: PropTypes.oneOf(["button", "submit", "reset"]),
-    variant: PropTypes.oneOf(["primary", "secondary", "black"]),
+    variant: PropTypes.oneOf([
+        "primary",
+        "secondary",
+        "black",
+        "update",
+        "delete",
+    ]),
     className: PropTypes.string,
     processing: PropTypes.bool,
     children: PropTypes.node,

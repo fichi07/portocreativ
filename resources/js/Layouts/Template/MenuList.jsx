@@ -8,7 +8,7 @@ const ListMenu = [
         text: "Project",
     },
     {
-        link: "",
+        link: "admin.dashboard.tool.index",
         text: "Tools",
     },
 ];

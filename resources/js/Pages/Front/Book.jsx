@@ -1,25 +1,31 @@
 import TextInput from "@/Components/TextInput";
-import SelectInput from "@/Components/SelectInput";
+
 import { Head } from "@inertiajs/react";
 import { useForm } from "@inertiajs/inertia-react";
 import React, { useState } from "react";
 import Authenticated from "@/Layouts/Template/Index";
 export default function Book() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { setData, post, processing } = useForm({
         name: "",
         email: "",
-        select: "",
+        category: "",
         budget: "",
         brief: "",
     });
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.value);
+    const ohandleOnChange = (event) => {
+        setData(
+            event.target.name,
+            event.target.type == "file"
+                ? event.target.files[0]
+                : event.target.value
+        );
     };
+
     const [selectedOption, setSelectedOption] = useState("");
     const options = [
-        { value: "webdeveloper", label: "Web Developer" },
-        { value: "uiux", label: "UI/UX" },
-        { value: "mobiledeveloper", label: "Mobile Developer" },
+        { value: "Website Development", label: "Website Development" },
+        { value: "UI/UX", label: "UI/UX" },
+        { value: "Mobile Development", label: "Mobile Development" },
     ];
 
     return (
@@ -94,10 +100,9 @@ export default function Book() {
                                 <TextInput
                                     type="text"
                                     name="name"
-                                    placeholder="Write your complete name"
-                                    value={data.name}
+                                    placeholder="What’s your Full Name"
                                     isFocused={true}
-                                    handleChange={onHandleChange}
+                                    handleChange={ohandleOnChange}
                                     required
                                 ></TextInput>
                                 {/*    <input
@@ -117,9 +122,8 @@ export default function Book() {
                                     type="email"
                                     name="email"
                                     placeholder="What’s your email address"
-                                    value={data.email}
                                     isFocused={true}
-                                    handleChange={onHandleChange}
+                                    handleChange={ohandleOnChange}
                                     required
                                 ></TextInput>
                                 {/*   <input
@@ -134,15 +138,19 @@ export default function Book() {
                             <div className="grid grid-cols-2 gap-5">
                                 <label className="flex flex-col gap-[10px] font-semibold w-full">
                                     <span className="text-white">Category</span>
-                                    <SelectInput
-                                        name="select"
-                                        value={data.selectedOption}
-                                        handleChange={onHandleChange}
-                                        placeholder="Pilih opsi"
-                                        options={options}
-                                        variant="primary-outline"
+                                    <select
+                                        name="category"
+                                        onChange={ohandleOnChange}
+                                        className="font-semibold text-gray-500 rounded-2xl py-[13px] px-7 w-full appearance-none outline-none placeholder:font-normal placeholder:text-base "
                                         required
-                                    />
+                                    >
+                                        <option value="">Pilih opsi</option>
+                                        {options.map((option) => (
+                                            <option key={option.value}>
+                                                {option.label}
+                                            </option>
+                                        ))}
+                                    </select>
                                     {/*  <select
                                     name="category"
                                     id="category"
@@ -171,9 +179,8 @@ export default function Book() {
                                         type="number"
                                         name="budget"
                                         placeholder="Tell me your budget"
-                                        value={data.budget}
                                         isFocused={true}
-                                        handleChange={onHandleChange}
+                                        handleChange={ohandleOnChange}
                                         required
                                     ></TextInput>
                                     {/*  <input
@@ -194,9 +201,8 @@ export default function Book() {
                                     type="textarea"
                                     name="brief"
                                     placeholder="Brief me your a whole project"
-                                    value={data.brief}
                                     isFocused={true}
-                                    handleChange={onHandleChange}
+                                    handleChange={ohandleOnChange}
                                     required
                                     rows={5}
                                 ></TextInput>

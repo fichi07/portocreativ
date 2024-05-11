@@ -1,6 +1,6 @@
 import Authenticated from "@/Layouts/Template/Index";
 import TopbarAdmin from "@/Layouts/Template/TopbarAdmin";
-
+import React from "react";
 import { Head } from "@inertiajs/react";
 export default function Index({ auth }) {
     return (

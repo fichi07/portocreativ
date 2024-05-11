@@ -3,6 +3,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import Faq from "@/Components/Faq";
 import Authenticated from "@/Layouts/Template/Index";
 import ServiceCard from "@/Components/ServiceCard";
+import Footer from "@/Components/Footer";
 import Topbar from "@/Layouts/Template/Topbar";
 import React from "react";
 export default function Index() {
@@ -942,7 +943,7 @@ export default function Index() {
 
                 {/* FAQ */}
                 <Faq></Faq>
-
+                <Footer></Footer>
                 {/*  Footer */}
             </Authenticated>
         </>
