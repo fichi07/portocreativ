@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tool;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Tool\Store;
+use App\Http\Requests\Admin\Tool\Update;
 
 class ToolController extends Controller
 {
@@ -12,7 +15,11 @@ class ToolController extends Controller
      */
     public function index()
     {
-        //
+        $tools=Tool::withTrashed()->orderBy('deleted_at','desc')->get();
+        return Inertia('Admin/Tool/Index',[
+            'tools'=> $tools
+        ]);
+       // //
     }
 
     /**
@@ -20,15 +27,22 @@ class ToolController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia('Admin/Tool/Create');  //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        //
+        $data = $request->validated();
+       $data['logo'] = Storage::disk('public')->put('tools',$request->file('logo'));
+       $tool= Tool::create($data); 
+
+         return redirect(route('admin.dashboard.tool.index'))->with([
+            'message' => "Tool inserted successfully",
+            'type' => 'success'
+        ]); //
     }
 
     /**
@@ -44,15 +58,29 @@ class ToolController extends Controller
      */
     public function edit(Tool $tool)
     {
-        //
+         return inertia('Admin/Tool/Edit',[
+        'tool'=>$tool
+       ]);//// //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tool $tool)
+    public function update(Update $request, Tool $tool)
     {
-        //
+        $data = $request->validated();
+        if($request->file('logo')){
+             $data['logo'] = Storage::disk('public')->put('tools',$request->file('logo'));
+             Storage::disk('public')->delete($tool->logo);
+        } else{
+            $data['logo']= $tool->logo;
+        
+        }
+        $tool->update($data);
+       return redirect(route('admin.dashboard.tool.index'))->with([
+         'message' => "Tools Updated successfully",
+            'type' => 'success'
+       ]); // //  //
     }
 
     /**
@@ -60,6 +88,18 @@ class ToolController extends Controller
      */
     public function destroy(Tool $tool)
     {
-        //
+       $tool->delete();
+        return redirect(route('admin.dashboard.tool.index'))->with([
+         'message' => "Tool Deleted successfully",
+            'type' => 'success'
+       ]);//  //
+    }
+      public function restore($tool)
+    {
+        Tool::withTrashed()->find($tool)->restore();
+       return redirect(route('admin.dashboard.tool.index'))->with([
+         'message' => "Tool Restored successfully",
+            'type' => 'success'
+       ]);//
     }
 }

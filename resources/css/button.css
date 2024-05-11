@@ -1,0 +1,23 @@
+.btn-primary {
+    @apply font-bold text-lg leading-[20px]  text-white rounded-[20px] p-[25px_35px] bg-portto-purple w-fit transition-all duration-300 hover:shadow-[0_10px_20px_0_#4920E5] !important;
+}
+
+.btn-secondary {
+    @apply bg-portto-light-gold font-bold text-lg p-[12px_28px] w-fit rounded-full transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280] !important;
+}
+
+.btn-black {
+    @apply bg-indigo-950 font-bold text-lg text-white rounded-full  py-3 px-5 w-fit transition-all duration-300 hover:bg-white hover:text-portto-black hover:ring hover:ring-portto-black;
+}
+
+.top-link.active {
+    @apply font-semibold border-b-[3px] text-portto-light-gold;
+}
+
+.btn-update {
+    @apply font-semibold text-lg text-white rounded-full py-3 px-5 bg-green-800 w-fit transition-all duration-300 hover:bg-white hover:text-green-400 hover:ring hover:ring-slate-600;
+}
+
+.btn-delete {
+    @apply font-semibold text-lg text-white rounded-full py-3 px-5 bg-red-600 w-fit transition-all duration-300 hover:bg-white hover:text-red-400 hover:ring hover:ring-slate-600;
+}
