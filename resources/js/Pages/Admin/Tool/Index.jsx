@@ -55,34 +55,7 @@ export default function Index({ auth, flashMessage, tools }) {
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className="flex flex-row items-end gap-x-2">
-                                            <Link
-                                                href={route(
-                                                    "admin.dashboard.project.edit",
-                                                    tool.id
-                                                )}
-                                            >
-                                                <PrimaryButton
-                                                    type="button"
-                                                    variant="black"
-                                                >
-                                                    Add Tools
-                                                </PrimaryButton>
-                                            </Link>
-                                            <Link
-                                                href={route(
-                                                    "admin.dashboard.project.edit",
-                                                    tool.id
-                                                )}
-                                            >
-                                                <PrimaryButton
-                                                    type="button"
-                                                    variant="black"
-                                                >
-                                                    Add Screenshot
-                                                </PrimaryButton>
-                                            </Link>
-                                        </div>
+
                                         <div className="flex flex-row items-center w-auto gap-x-2">
                                             {!tool.deleted_at && (
                                                 <Link

@@ -10,11 +10,8 @@ class Project extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable=[
-        
-        'project_id',
-        'screenshot'
-
+   protected $guarded =[
+        'id'
     ];
 
     public function tools(){

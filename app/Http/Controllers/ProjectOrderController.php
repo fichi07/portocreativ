@@ -12,7 +12,11 @@ class ProjectOrderController extends Controller
      */
     public function index()
     {
-        //
+      $projectOrder=ProjectOrder::withTrashed()->orderBy('deleted_at','desc')->get();
+       
+        return Inertia('Admin/Project_order/Index',[
+            'projectOrder'=> $projectOrder
+        ]);//
     }
 
     /**
@@ -36,7 +40,9 @@ class ProjectOrderController extends Controller
      */
     public function show(ProjectOrder $projectOrder)
     {
-        //
+        return Inertia('Admin/Project_order/Detail',[
+            'projectOrder'=> $projectOrder
+        ]); //
     }
 
     /**

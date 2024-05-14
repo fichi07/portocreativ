@@ -8,6 +8,7 @@ PrimaryButton.propTypes = {
         "secondary",
         "black",
         "update",
+        "details",
         "delete",
     ]),
     className: PropTypes.string,

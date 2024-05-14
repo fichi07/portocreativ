@@ -2,17 +2,13 @@ import Authenticated from "@/Layouts/Template/Index";
 import TopbarAdmin from "@/Layouts/Template/TopbarAdmin";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
+import FlashMessage from "@/Components/FlashMessage";
 import { useForm } from "@inertiajs/inertia-react";
 import React from "react";
 import { Head, Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 
-export default function Index({
-    auth,
-    project,
-    assignedScreenshots,
-    screenshots,
-}) {
+export default function Index({ auth, project, flashMessage, screenshots }) {
     const { delete: destroy } = useForm();
     const { setData, post, processing, errors } = useForm({
         project_id: "",
@@ -20,12 +16,21 @@ export default function Index({
     });
 
     const ohandleOnChange = (event) => {
-        setData(
-            event.target.name,
-            event.target.type == "file"
-                ? event.target.files[0]
-                : event.target.value
-        );
+        const selectedFile = event.target.files[0];
+
+        // Periksa ukuran file yang dipilih
+        if (selectedFile && selectedFile.size > 2097152) {
+            // Jika ukuran file lebih dari 2MB, tampilkan pesan kesalahan
+            alert("File size must not exceed 2MB");
+            // Kosongkan input file
+            event.target.value = null;
+        } else {
+            // Jika ukuran file valid, tetapkan data ke state
+            setData(
+                event.target.name,
+                event.target.type == "file" ? selectedFile : event.target.value
+            );
+        }
     };
 
     const submit = (e) => {
@@ -53,6 +58,11 @@ export default function Index({
                                 className="flex flex-col gap-y-5 item-center"
                                 onSubmit={submit}
                             >
+                                {flashMessage?.message && (
+                                    <FlashMessage
+                                        message={flashMessage.message}
+                                    />
+                                )}
                                 <h1 className="text-indigo-950 text-3xl font-bold ">
                                     Assign Tool to{" "}
                                     {project ? project.name : "Project"}
@@ -83,7 +93,12 @@ export default function Index({
                                         isFocused={true}
                                         handleChange={ohandleOnChange}
                                         required
-                                    ></TextInput>
+                                        isError={errors.screenshot}
+                                    />
+                                    <InputError
+                                        message={errors.screenshot}
+                                        className="mt-2"
+                                    />
                                     {/*   <input
                                 type="email"
                                 name="email"
@@ -147,9 +162,7 @@ export default function Index({
                                                     variant="delete"
                                                     className="py-3 px-5 rounded-full"
                                                 >
-                                                    {screenshot.deleted_at
-                                                        ? "Restore"
-                                                        : "Delete"}
+                                                    Delete
                                                 </PrimaryButton>
                                             </div>
                                         </div>

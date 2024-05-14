@@ -16,12 +16,21 @@ export default function Index({ auth }) {
         about: "",
     });
     const ohandleOnChange = (event) => {
-        setData(
-            event.target.name,
-            event.target.type == "file"
-                ? event.target.files[0]
-                : event.target.value
-        );
+        const selectedFile = event.target.files[0];
+
+        // Periksa ukuran file yang dipilih
+        if (selectedFile && selectedFile.size > 2097152) {
+            // Jika ukuran file lebih dari 2MB, tampilkan pesan kesalahan
+            alert("File size must not exceed 2MB");
+            // Kosongkan input file
+            event.target.value = null;
+        } else {
+            // Jika ukuran file valid, tetapkan data ke state
+            setData(
+                event.target.name,
+                event.target.type == "file" ? selectedFile : event.target.value
+            );
+        }
     };
     const options = [
         { value: "Website Development", label: "Website Development" },
@@ -31,7 +40,7 @@ export default function Index({ auth }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route("admin.dashboard.project.store"));
+        post(route("front.book.store"));
     };
     return (
         <>
@@ -60,19 +69,12 @@ export default function Index({ auth }) {
                                         isFocused={true}
                                         handleChange={ohandleOnChange}
                                         required
-                                    ></TextInput>
+                                        isError={errors.name}
+                                    />
                                     <InputError
                                         message={errors.name}
                                         className="mt-2"
                                     />
-                                    {/*    <input
-                                type="text"
-                                name="name"
-                                id="name"
-                                className="bg-white rounded-full p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C]"
-                                placeholder="Write your complete name"
-                                required
-                            /> */}
                                 </label>
                                 <label className="flex flex-col gap-[10px] font-semibold">
                                     <span className="text-black font-bold text-lg">
@@ -95,15 +97,6 @@ export default function Index({ auth }) {
                                         message={errors.category}
                                         className="mt-2"
                                     />
-
-                                    {/*   <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                className="bg-white rounded-full p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C]"
-                                placeholder="What’s your email address"
-                                required
-                            /> */}
                                 </label>
                                 <label className="flex flex-col gap-[10px] font-semibold">
                                     <span className="text-black font-bold text-lg">
@@ -116,15 +109,12 @@ export default function Index({ auth }) {
                                         isFocused={true}
                                         handleChange={ohandleOnChange}
                                         required
-                                    ></TextInput>
-                                    {/*   <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                className="bg-white rounded-full p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C]"
-                                placeholder="What’s your email address"
-                                required
-                            /> */}
+                                        isError={errors.cover}
+                                    />
+                                    <InputError
+                                        message={errors.cover}
+                                        className="mt-2"
+                                    />
                                 </label>
                                 <label className="flex flex-col gap-[10px] font-semibold">
                                     <span className="text-black font-bold text-lg">
@@ -138,14 +128,12 @@ export default function Index({ auth }) {
                                         handleChange={ohandleOnChange}
                                         required
                                         rows={5}
-                                    ></TextInput>
-                                    {/*  <textarea
-                                name="brief"
-                                id="brief"
-                                className="rounded-[20px] p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C] h-[250px]"
-                                placeholder="Brief me your a whole project"
-                                required
-                            ></textarea> */}
+                                        isError={errors.about}
+                                    />
+                                    <InputError
+                                        message={errors.about}
+                                        className="mt-2"
+                                    />
                                 </label>
                                 <PrimaryButton
                                     type="submit"

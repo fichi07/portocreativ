@@ -36,33 +36,33 @@ export default function Index({ auth, flashMessage, projects }) {
                                 )}
                             </div>
                             <hr className="my-10" />
-                            {projects.map((projects) => (
+                            {projects.map((project) => (
                                 <div
                                     className="flex flex-col gap-y-5"
-                                    key={projects.id}
+                                    key={project.id}
                                 >
                                     <div className="item-project flex flex-row items-center mb-5 justify-between">
                                         <div className="flex flex-row items-center gap-x-5">
                                             <img
-                                                src={`/storage/${projects.cover}`}
+                                                src={`/storage/${project.cover}`}
                                                 alt=""
                                                 className="object-cover w-[160px] h-[100px] rounded-2xl"
                                             />
                                             <div className="flex flex-col gap-y-1 ">
                                                 <h3 className="font-bold text-xl">
-                                                    {projects.name}
+                                                    {project.name}
                                                 </h3>
                                                 <p className="text-sm text-slate-400">
-                                                    {projects.category}
+                                                    {project.category}
                                                 </p>
                                             </div>
                                         </div>
-                                        {!projects.deleted_at && (
+                                        {!project.deleted_at && (
                                             <div className="flex flex-row items-end gap-x-2">
                                                 <Link
                                                     href={route(
                                                         "admin.dashboard.projecttol.assign.tool",
-                                                        projects.id
+                                                        project.id
                                                     )}
                                                 >
                                                     <PrimaryButton
@@ -75,7 +75,7 @@ export default function Index({ auth, flashMessage, projects }) {
                                                 <Link
                                                     href={route(
                                                         "admin.dashboard.projectscreenshot.create",
-                                                        projects.id
+                                                        project.id
                                                     )}
                                                 >
                                                     <PrimaryButton
@@ -88,11 +88,11 @@ export default function Index({ auth, flashMessage, projects }) {
                                             </div>
                                         )}
                                         <div className="flex flex-row items-center w-auto gap-x-2">
-                                            {!projects.deleted_at && (
+                                            {!project.deleted_at && (
                                                 <Link
                                                     href={route(
                                                         "admin.dashboard.project.edit",
-                                                        projects.id
+                                                        project.id
                                                     )}
                                                 >
                                                     <PrimaryButton
@@ -106,17 +106,17 @@ export default function Index({ auth, flashMessage, projects }) {
                                             )}
                                             <div
                                                 onClick={() => {
-                                                    projects.deleted_at
+                                                    project.deleted_at
                                                         ? put(
                                                               route(
                                                                   "admin.dashboard.project.restore",
-                                                                  projects.id
+                                                                  project.id
                                                               )
                                                           )
                                                         : destroy(
                                                               route(
                                                                   "admin.dashboard.project.destroy",
-                                                                  projects.id
+                                                                  project.id
                                                               )
                                                           );
                                                 }}
@@ -126,7 +126,7 @@ export default function Index({ auth, flashMessage, projects }) {
                                                     variant="delete"
                                                     className="py-3 px-5 rounded-full"
                                                 >
-                                                    {projects.deleted_at
+                                                    {project.deleted_at
                                                         ? "Restore"
                                                         : "Delete"}
                                                 </PrimaryButton>

@@ -1,28 +1,49 @@
 import { Head, Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Faq from "@/Components/Faq";
+import ProjectCard from "@/Components/ProjectCard";
 import Authenticated from "@/Layouts/Template/Index";
 import ServiceCard from "@/Components/ServiceCard";
 import Footer from "@/Components/Footer";
 import Topbar from "@/Layouts/Template/Topbar";
 import React from "react";
-export default function Index() {
+import FlashMessage from "@/Components/FlashMessage";
+
+const scrollToServices = (sectionId) => {
+    const servicesSection = document.getElementById(sectionId);
+    servicesSection.scrollIntoView({ behavior: "smooth" });
+};
+
+export default function Index({ projects, flashMessage }) {
     return (
         <>
             <Authenticated>
                 <Head title="Creativ Porto"></Head>
-                <Topbar></Topbar>
-                <section className="flex flex-col gap-[100px] bg-portto-black relative">
+                {flashMessage?.message && (
+                    <FlashMessage message={flashMessage.message} />
+                )}
+                <Topbar />
+
+                <section
+                    id="Home"
+                    className="flex flex-col gap-[100px] bg-portto-black relative"
+                >
                     {/* Introduction */}
                     <div className="hero container max-w-[1130px] pt-[100px] mx-auto flex justify-between items-center relative">
-                        <div className="flex flex-col gap-[50px] h-fit w-fit text-white z-10">
-                            <p className="font-semibold text-2xl">
-                                I’m Shayna 👋
+                        <div className="flex flex-col gap-[20px] h-fit w-fit text-white z-10">
+                            <p className="font-semibold text-3xl">
+                                I’m Wahyu Fitra👋
                             </p>
                             <h1 className="font-extrabold text-[80px] leading-[90px]">
-                                Professional Designer & Dev
+                                Professional Website Developer
                             </h1>
-                            <PrimaryButton type="button" variant="primary">
+                            <PrimaryButton
+                                type="button"
+                                variant="primary"
+                                onClick={() => {
+                                    scrollToServices("Projects");
+                                }}
+                            >
                                 Explore Now
                             </PrimaryButton>
                         </div>
@@ -41,7 +62,7 @@ export default function Index() {
                     </div>
                     {/* Logo */}
                     <div className="company-logos w-full overflow-hidden pb-[190px]">
-                        <div className="group/slider flex flex-nowrap w-max items-center">
+                        {/*  <div className="group/slider flex flex-nowrap w-max items-center">
                             <div className="logo-container animate-[slide_25s_linear_infinite] group-hover/slider:pause-animate  flex gap-[70px] pl-[70px] items-center flex-nowrap">
                                 <div className="flex w-fit h-[40px] shrink-0">
                                     <img
@@ -158,7 +179,7 @@ export default function Index() {
                                     />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="stats container max-w-[1130px] mx-auto bg-gradient-to-r from-[#FFEDD3] to-[#FFCD83] flex justify-between items-center px-[100px] rounded-[30px] w-full h-[180px] absolute transform -translate-x-1/2 translate-y-1/2 bottom-0 left-1/2">
@@ -208,7 +229,7 @@ export default function Index() {
                         </div>
                         {/* Service Card */}
                         <div className="grid grid-cols-2 gap-[30px]">
-                            <ServiceCard></ServiceCard>
+                            <ServiceCard />
                         </div>
                     </div>
                 </section>
@@ -224,398 +245,62 @@ export default function Index() {
                     }}
                 >
                     <div className="flex flex-col gap-[10px] mb-[50px]">
-                        <h2 className="font-extrabold text-[50px] leading-[70px] text-center">
+                        <h2 className="font-extrabold text-[50px] leading-[70px] text-white text-center">
                             Great Projects
                         </h2>
-                        <p className="text-lg text-center">
+                        <p className="text-lg text-center text-white">
                             Working with awesome team from around the world
                         </p>
                     </div>
                     <div className="projects w-full flex flex-col mb-[30px] overflow-hidden">
                         <div className="group/slider slider flex flex-nowrap w-max items-center">
                             <div className="project-container animate-[slide_50s_linear_infinite] group-hover/slider:pause-animate flex gap-[30px] pl-[30px] items-center flex-nowrap">
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail1.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail2.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail3.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
+                                {projects.map((project) => (
+                                    <ProjectCard
+                                        key={project.id}
+                                        name={project.name}
+                                        cover={project.cover}
+                                        slug={project.slug}
+                                        category={project.category}
+                                    />
+                                ))}
                             </div>
                             <div className="project-container animate-[slide_50s_linear_infinite] group-hover/slider:pause-animate flex gap-[30px] pl-[30px] items-center flex-nowrap ">
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail1.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail2.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail3.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
+                                {projects.map((project) => (
+                                    <ProjectCard
+                                        key={project.id}
+                                        name={project.name}
+                                        slug={project.slug}
+                                        cover={project.cover}
+                                        category={project.category}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
                     <div className="projects w-full flex flex-col overflow-hidden">
                         <div className="group/slider slider flex flex-nowrap w-max items-center">
                             <div className="project-container animate-[slideToR_50s_linear_infinite] group-hover/slider:pause-animate flex gap-[30px] pl-[30px] items-center flex-nowrap">
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail1.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail2.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail3.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
+                                {projects.map((project) => (
+                                    <ProjectCard
+                                        key={project.id}
+                                        name={project.name}
+                                        cover={project.cover}
+                                        slug={project.slug}
+                                        category={project.category}
+                                    />
+                                ))}
                             </div>
                             <div className="project-container animate-[slideToR_50s_linear_infinite] group-hover/slider:pause-animate flex gap-[30px] pl-[30px] items-center flex-nowrap ">
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail1.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail2.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="group w-[650px] h-[450px] flex shrink-0 rounded-[30px] border border-white p-5 bg-[#FFFFFF33] backdrop-blur relative">
-                                    <div className="w-[608px] h-[408px] rounded-[30px] overflow-hidden absolute">
-                                        <img
-                                            src=" images/thumbnails/thumbnail3.png"
-                                            className="w-full h-full object-cover"
-                                            alt="thumbnail"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center justify-center gap-[50px] bg-portto-black rounded-[30px] relative opacity-0 hover:opacity-100 transition-all duration-300">
-                                        <div className="text-center z-10">
-                                            <p className="font-extrabold text-[32px] leading-[48px] mb-[10px] text-white">
-                                                AI Finance SaaS <br />
-                                                Website Integrations
-                                            </p>
-                                            <p className="text-lg text-[#BABABC]">
-                                                Website Development
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="details.html"
-                                            className="z-10 font-bold text-lg text-center w-fit h-fit bg-portto-light-gold rounded-full p-[14px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FFE7C280]"
-                                        >
-                                            View Details
-                                        </a>
-                                        <img
-                                            src=" images/Ellipse.svg"
-                                            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/2"
-                                            alt="background icon"
-                                        />
-                                    </div>
-                                </div>
+                                {projects.map((project) => (
+                                    <ProjectCard
+                                        key={project.id}
+                                        name={project.name}
+                                        cover={project.cover}
+                                        slug={project.slug}
+                                        category={project.category}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -938,11 +623,18 @@ export default function Index() {
                                 </div>
                             </div>
                         </div>
+                        <div className="flex flex-col gap-[30px] mt-[50px] items-center">
+                            <Link href={route("front.testimony")}>
+                                <PrimaryButton type="button" variant="black">
+                                    <span>Let Review Us</span>
+                                </PrimaryButton>
+                            </Link>
+                        </div>
                     </div>
                 </section>
 
                 {/* FAQ */}
-                <Faq></Faq>
+                <Faq />
                 <Footer></Footer>
                 {/*  Footer */}
             </Authenticated>

@@ -74,6 +74,7 @@ export default function Index({ auth, tools, project, assignedTools }) {
                                         onChange={ohandleOnChange}
                                         className="font-semibold text-gray-500 rounded-2xl py-[13px] px-7 w-full appearance-none outline-none placeholder:font-normal placeholder:text-base "
                                         required
+                                        isError={errors.tool}
                                     >
                                         <option>Pilih Opsi</option>
                                         {tools.map((tool) => (
@@ -85,8 +86,9 @@ export default function Index({ auth, tools, project, assignedTools }) {
                                             </option>
                                         ))}
                                     </select>
+
                                     <InputError
-                                        message={errors.tools}
+                                        message={errors.tool}
                                         className="mt-2"
                                     />
                                 </label>
