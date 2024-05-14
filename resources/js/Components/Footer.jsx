@@ -2,15 +2,18 @@ import React from "react";
 export default function Footer() {
     return (
         <>
-            <footer className="bg-portto-black text-white pb-[50px] border-t-[10px] border-portto-purple">
+            <footer
+                id="About"
+                className="bg-portto-black text-white pb-[50px] border-t-[10px] border-portto-purple"
+            >
                 <div className="container max-w-[1130px] mx-auto flex justify-between pt-[100px] pb-[50px] mb-[50px] relative border-b border-[#585867]">
                     <img
-                        src=" images/Ellipse.svg"
+                        src=" /images/Ellipse.svg"
                         className="absolute h-[300px] top-[70px] -left-[20px] z-0"
                         alt="icon"
                     />
                     <div className="flex shrink-0 h-fit z-10">
-                        <img src=" images/logos/logo.svg" alt="logo" />
+                        <img src=" /images/logos/logo.svg" alt="logo" />
                     </div>
                     <div className="flex gap-[100px] z-10">
                         <div className="flex flex-col gap-5">
@@ -100,7 +103,7 @@ export default function Footer() {
                                 href=""
                                 className="font-medium hover:font-semibold hover:text-portto-light-gold transition-all duration-300 flex items-center gap-[6px]"
                             >
-                                <img src=" images/icons/call.svg" alt="icon" />
+                                <img src=" /images/icons/call.svg" alt="icon" />
                                 +1 2208 1996
                             </a>
                             <a
@@ -108,7 +111,7 @@ export default function Footer() {
                                 className="font-medium hover:font-semibold hover:text-portto-light-gold transition-all duration-300 flex items-center gap-[6px]"
                             >
                                 <img
-                                    src=" images/icons/dribbble.svg"
+                                    src=" /images/icons/dribbble.svg"
                                     alt="icon"
                                 />
                                 buildwithangga
@@ -117,14 +120,14 @@ export default function Footer() {
                                 href=""
                                 className="font-medium hover:font-semibold hover:text-portto-light-gold transition-all duration-300 flex items-center gap-[6px]"
                             >
-                                <img src=" images/icons/sms.svg" alt="icon" />
+                                <img src=" /images/icons/sms.svg" alt="icon" />
                                 team@bwa.com
                             </a>
                         </div>
                     </div>
                 </div>
                 <p className="text-sm text-[#A0A0AC] text-center">
-                    All Rights Reserved. Copyright BuildWithAngga 2024.
+                    All Rights Reserved. Copyright Wahyu Fitra 2024.
                 </p>
             </footer>
         </>

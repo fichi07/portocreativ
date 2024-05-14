@@ -6,7 +6,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectToolController;
+use App\Http\Controllers\ProjectOrderController;
 use App\Http\Controllers\ProjectScreenshotController;
+use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\ToolController;
 use App\Models\Tool;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +25,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[FrontController::class,'index'])->name('front.index');
-Route::get('/detail',[FrontController::class, 'detail'])->name('front.detail');
+
+Route::get('/testimony',[TestimonialController::class, 'create'])->name('front.testimony');
+ Route::post('/testimony/save', [TestimonialController::class, 'store'])->name('front.testimony.store');
+
 Route::get('/book',[FrontController::class, 'book'])->name('front.book');
+ Route::post('/book/save', [FrontController::class, 'store'])->name('front.book.store');
+
+Route::get('/detail/{project:slug}', [FrontController::class, 'detail'])->name('front.detail');
+
 
 
 Route::middleware('auth')->prefix('dashboard')->name('admin.dashboard.')->group(function(){
@@ -35,6 +44,9 @@ Route::middleware('auth')->prefix('dashboard')->name('admin.dashboard.')->group(
 
     Route::resource('tool', ToolController::class);
     Route::put('tool/{tool}/restore', [ToolController::class,'restore'])->name('tool.restore');
+
+    Route::resource('project_order', ProjectOrderController::class);
+    Route::resource('testimony', TestimonialController::class);
 
   /*   Route::delete('/project-tools/{id}', [ProjectToolController::class, 'destroy'])->name('project-tools.destroy'); */
     Route::resource('projecttool', ProjectToolController::class);

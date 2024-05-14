@@ -23,46 +23,6 @@ export default function TopbarAdmin({ name }) {
                 <nav className=" bg-indigo-950 border-b border-gray-100">
                     <div className="container max-w-[1200px] mx-auto flex justify-between items-center pt-[20px] z-10">
                         <ul className="flex gap-[50px] items-center text-gray-100 font-medium">
-                            {/* <li>
-                                <a
-                                    href={route("admin.dashboard.index")}
-                                    className="font-medium text-lg hover:text-portto-light-gold transition-all duration-300"
-                                >
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href=""
-                                    className="font-medium text-lg hover:text-portto-light-gold transition-all duration-300"
-                                >
-                                    Services
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href=""
-                                    className="font-medium text-lg hover:text-portto-light-gold transition-all duration-300"
-                                >
-                                    Testimonials
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href=""
-                                    className="font-medium text-lg hover:text-portto-light-gold transition-all duration-300"
-                                >
-                                    Pricing
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href=""
-                                    className="font-medium text-lg hover:text-portto-light-gold transition-all duration-300"
-                                >
-                                    About
-                                </a>
-                            </li> */}
                             {ListMenu.map((menu, index) => (
                                 <MenuItem
                                     key={`${index}-${menu.text}`}

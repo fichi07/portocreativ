@@ -23,8 +23,8 @@ class ProjectScreenshotController extends Controller
      */
     public function create(Request $request,Project $project)
     {
-        $screenshots = $project->screenshots()->withTrashed()->orderBy('deleted_at', 'desc')->get();
-        $tools=ProjectScreenshot::withTrashed()->orderBy('deleted_at','desc')->get();    
+        $screenshots = $project->screenshots()->orderBy('deleted_at', 'desc')->get();
+          
         return Inertia('Admin/Project_screenshoot/Create', [
         'screenshots'=>$screenshots,
      
@@ -42,6 +42,9 @@ class ProjectScreenshotController extends Controller
         $validated = $request->validate([
             'screenshot' => 'required|image|max:2048', // assuming 'tools' is your database table for tools
         ]);
+         $screenshotFile = $request->file('screenshot');
+
+      
         $validated['screenshot'] = Storage::disk('public')->put('project_screenshots',$request->file('screenshot'));
         // Add the project_id from the route model binding
         $validated['project_id'] = $project->id; 

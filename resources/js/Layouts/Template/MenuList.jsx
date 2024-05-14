@@ -11,5 +11,13 @@ const ListMenu = [
         link: "admin.dashboard.tool.index",
         text: "Tools",
     },
+    {
+        link: "admin.dashboard.project_order.index",
+        text: "Orders",
+    },
+    {
+        link: "admin.dashboard.testimony.index",
+        text: "Testimony",
+    },
 ];
 export { ListMenu };

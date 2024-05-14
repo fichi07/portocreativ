@@ -13,7 +13,7 @@ export default function Faq() {
                 <div className="flex gap-[70px] items-center pt-[100px] pb-[150px]">
                     <div className="flex flex-col gap-[30px]">
                         <div className="w-20 h-20 flex shrink-0 rounded-full bg-portto-purple items-center justify-center">
-                            <img src="images/icons/messages.svg" alt="icon" />
+                            <img src="/images/icons/messages.svg" alt="icon" />
                         </div>
                         <div className="flex flex-col gap-[10px]">
                             <h2 className="font-extrabold text-[50px] leading-[70px]">
@@ -23,7 +23,7 @@ export default function Faq() {
                                 If you have any question please contact me.
                             </p>
                         </div>
-                        <Link href="">
+                        <Link href={route("front.book")}>
                             <PrimaryButton type="button" variant="black">
                                 Contact Me
                             </PrimaryButton>
@@ -46,7 +46,7 @@ export default function Faq() {
                                     }`}
                                 >
                                     <img
-                                        src="images/icons/arrow-circle-down.svg"
+                                        src="/images/icons/arrow-circle-down.svg"
                                         className="transition-all duration-300"
                                         alt="icon"
                                     />
@@ -81,7 +81,7 @@ export default function Faq() {
                                     }`}
                                 >
                                     <img
-                                        src="images/icons/arrow-circle-down.svg"
+                                        src="/images/icons/arrow-circle-down.svg"
                                         className="transition-all duration-300"
                                         alt="icon"
                                     />
@@ -115,7 +115,7 @@ export default function Faq() {
                                     }`}
                                 >
                                     <img
-                                        src="images/icons/arrow-circle-down.svg"
+                                        src="/images/icons/arrow-circle-down.svg"
                                         className="transition-all duration-300"
                                         alt="icon"
                                     />

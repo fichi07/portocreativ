@@ -82,7 +82,7 @@ class ProjectController extends Controller
         }
         $project->update($data);
        return redirect(route('admin.dashboard.project.index'))->with([
-         'message' => "Movie Updated successfully",
+         'message' => "Project Updated successfully",
             'type' => 'success'
        ]); // //
     }

@@ -1,11 +1,12 @@
 import TextInput from "@/Components/TextInput";
-
+import InputError from "@/Components/InputError";
+import PrimaryButton from "@/Components/PrimaryButton";
 import { Head } from "@inertiajs/react";
 import { useForm } from "@inertiajs/inertia-react";
 import React, { useState } from "react";
 import Authenticated from "@/Layouts/Template/Index";
 export default function Book() {
-    const { setData, post, processing } = useForm({
+    const { setData, post, processing, errors } = useForm({
         name: "",
         email: "",
         category: "",
@@ -21,13 +22,16 @@ export default function Book() {
         );
     };
 
-    const [selectedOption, setSelectedOption] = useState("");
     const options = [
         { value: "Website Development", label: "Website Development" },
         { value: "UI/UX", label: "UI/UX" },
         { value: "Mobile Development", label: "Mobile Development" },
     ];
+    const submit = (e) => {
+        e.preventDefault();
 
+        post(route("front.book.store"));
+    };
     return (
         <>
             <Authenticated>
@@ -91,6 +95,7 @@ export default function Book() {
                         </div>
                         <form
                             action=""
+                            onSubmit={submit}
                             className="flex flex-col gap-5 w-[550px]"
                         >
                             <label className="flex flex-col gap-[10px] font-semibold">
@@ -104,15 +109,12 @@ export default function Book() {
                                     isFocused={true}
                                     handleChange={ohandleOnChange}
                                     required
-                                ></TextInput>
-                                {/*    <input
-                                type="text"
-                                name="name"
-                                id="name"
-                                className="bg-white rounded-full p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C]"
-                                placeholder="Write your complete name"
-                                required
-                            /> */}
+                                    isError={errors.name}
+                                />
+                                <InputError
+                                    message={errors.name}
+                                    className="mt-2"
+                                />
                             </label>
                             <label className="flex flex-col gap-[10px] font-semibold">
                                 <span className="text-white">
@@ -125,15 +127,12 @@ export default function Book() {
                                     isFocused={true}
                                     handleChange={ohandleOnChange}
                                     required
-                                ></TextInput>
-                                {/*   <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                className="bg-white rounded-full p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C]"
-                                placeholder="What’s your email address"
-                                required
-                            /> */}
+                                    isError={errors.email}
+                                />
+                                <InputError
+                                    message={errors.email}
+                                    className="mt-2"
+                                />
                             </label>
                             <div className="grid grid-cols-2 gap-5">
                                 <label className="flex flex-col gap-[10px] font-semibold w-full">
@@ -151,25 +150,6 @@ export default function Book() {
                                             </option>
                                         ))}
                                     </select>
-                                    {/*  <select
-                                    name="category"
-                                    id="category"
-                                    className="font-semibold bg-white rounded-full p-[14px_30px] pr-[54px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green invalid:text-[#878C9C] invalid:font-normal bg-[url(images/icons/arrow-down.svg)] bg-no-repeat bg-[91%]"
-                                    required
-                                >
-                                    <option
-                                        value=""
-                                        className="text-[#878C9C]"
-                                        selected
-                                        disabled
-                                        hidden
-                                    >
-                                        Select category
-                                    </option>
-                                    <option value="">
-                                        Website Development
-                                    </option>
-                                </select> */}
                                 </label>
                                 <label className="flex flex-col gap-[10px] font-semibold w-full">
                                     <span className="text-white">
@@ -182,15 +162,12 @@ export default function Book() {
                                         isFocused={true}
                                         handleChange={ohandleOnChange}
                                         required
-                                    ></TextInput>
-                                    {/*  <input
-                                    type="number"
-                                    name="budget"
-                                    id="email"
-                                    className="bg-white rounded-full p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C]"
-                                    placeholder="Tell me your budget"
-                                    required
-                                /> */}
+                                        isError={errors.budget}
+                                    />
+                                    <InputError
+                                        message={errors.budget}
+                                        className="mt-2"
+                                    />
                                 </label>
                             </div>
                             <label className="flex flex-col gap-[10px] font-semibold">
@@ -205,18 +182,20 @@ export default function Book() {
                                     handleChange={ohandleOnChange}
                                     required
                                     rows={5}
-                                ></TextInput>
-                                {/*  <textarea
-                                name="brief"
-                                id="brief"
-                                className="rounded-[20px] p-[14px_30px] appearance-none outline-none focus:ring-[3px] focus:ring-portto-green placeholder:font-normal placeholder:text-base placeholder:text-[#878C9C] h-[250px]"
-                                placeholder="Brief me your a whole project"
-                                required
-                            ></textarea> */}
+                                    isError={errors.brief}
+                                />
+                                <InputError
+                                    message={errors.brief}
+                                    className="mt-2"
+                                />
                             </label>
-                            <button className="font-bold text-lg text-white bg-portto-purple rounded-[20px] p-5 transition-all duration-300 hover:shadow-[0_10px_20px_0_#4920E5]">
+                            <PrimaryButton
+                                type="submit"
+                                processing={processing}
+                                className="font-bold text-lg text-white bg-portto-purple rounded-[20px] p-5 transition-all duration-300 hover:shadow-[0_10px_20px_0_#4920E5]"
+                            >
                                 Request for Meeting
-                            </button>
+                            </PrimaryButton>
                         </form>
                     </div>
                 </section>
