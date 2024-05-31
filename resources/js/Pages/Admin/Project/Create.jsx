@@ -40,7 +40,7 @@ export default function Index({ auth }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route("front.book.store"));
+        post(route("admin.dashboard.project.store"));
     };
     return (
         <>

@@ -238,7 +238,10 @@ export default function Detail({ projects, assignedTools, screenshots }) {
                     </div>
                 </section>
 
-                <section id="Book" className="container max-w-[1130px] mx-auto">
+                <section
+                    id="Book"
+                    className="container max-w-[1130px] mx-auto mb-[80px]"
+                >
                     <div className="bg-portto-black flex justify-between px-[50px] rounded-[50px] h-[476px] mt-[100px] bg-[url('/images/Ellipse.svg')] bg-center bg-no-repeat bg-contain bg-[length:400px_400px] relative">
                         <div className="group/projects w-[220px] overflow-hidden">
                             <div className="slider flex flex-col h-max justify-center">
@@ -335,98 +338,6 @@ export default function Detail({ projects, assignedTools, screenshots }) {
                     </div>
                 </section>
 
-                <section
-                    id="Projects"
-                    className="w-full flex flex-col py-[100px]"
-                    style={{
-                        backgroundImage: `url('/images/background/background1.png')`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                >
-                    <div className="flex flex-col gap-[10px] mb-[50px]">
-                        <h2 className="font-extrabold text-[50px] leading-[70px] text-white text-center">
-                            Great Projects
-                        </h2>
-                        <p className="text-lg text-center text-white">
-                            Working with awesome team from around the world
-                        </p>
-                    </div>
-                    <div className="projects w-full flex flex-col mb-[30px] overflow-hidden">
-                        <div className="group/slider slider flex flex-nowrap w-max items-center">
-                            <div className="project-container animate-[slide_50s_linear_infinite] group-hover/slider:pause-animate flex gap-[30px] pl-[30px] items-center flex-nowrap">
-                                {screenshots.map((screensho) => (
-                                    <div
-                                        key={screensho.id}
-                                        className="w-full h-[160px] flex shrink-0 rounded-[30px] border border-white p-[10px] bg-[#FFFFFF33] backdrop-blur"
-                                    >
-                                        <div className="w-full h-full rounded-[20px] overflow-hidden">
-                                            <img
-                                                src={`/storage/${screensho.screenshot}`}
-                                                className="w-full h-full object-cover"
-                                                alt="thumbnail"
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="project-container animate-[slide_50s_linear_infinite] group-hover/slider:pause-animate flex gap-[30px] pl-[30px] items-center flex-nowrap ">
-                                {screenshots.map((screensho) => (
-                                    <div
-                                        key={screensho.id}
-                                        className="w-full h-[160px] flex shrink-0 rounded-[30px] border border-white p-[10px] bg-[#FFFFFF33] backdrop-blur"
-                                    >
-                                        <div className="w-full h-full rounded-[20px] overflow-hidden">
-                                            <img
-                                                src={`/storage/${screensho.screenshot}`}
-                                                className="w-full h-full object-cover"
-                                                alt="thumbnail"
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="projects w-full flex flex-col overflow-hidden">
-                        <div className="group/slider slider flex flex-nowrap w-max items-center">
-                            <div className="project-container animate-[slideToR_50s_linear_infinite] group-hover/slider:pause-animate flex gap-[30px] pl-[30px] items-center flex-nowrap">
-                                {screenshots.map((screensho) => (
-                                    <div
-                                        key={screensho.id}
-                                        className="w-full h-[160px] flex shrink-0 rounded-[30px] border border-white p-[10px] bg-[#FFFFFF33] backdrop-blur"
-                                    >
-                                        <div className="w-full h-full rounded-[20px] overflow-hidden">
-                                            <img
-                                                src={`/storage/${screensho.screenshot}`}
-                                                className="w-full h-full object-cover"
-                                                alt="thumbnail"
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="project-container animate-[slideToR_50s_linear_infinite] group-hover/slider:pause-animate flex gap-[30px] pl-[30px] items-center flex-nowrap ">
-                                {screenshots.map((screensho) => (
-                                    <div
-                                        key={screensho.id}
-                                        className="w-full h-[160px] flex shrink-0 rounded-[30px] border border-white p-[10px] bg-[#FFFFFF33] backdrop-blur"
-                                    >
-                                        <div className="w-full h-full rounded-[20px] overflow-hidden">
-                                            <img
-                                                src={`/storage/${screensho.screenshot}`}
-                                                className="w-full h-full object-cover"
-                                                alt="thumbnail"
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <Faq></Faq>
                 <Footer></Footer>
             </Authenticated>
         </>

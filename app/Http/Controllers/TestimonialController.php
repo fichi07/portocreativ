@@ -13,12 +13,12 @@ class TestimonialController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Testimonial $testimonial)
+    public function index()
     {
-        $testimonial=Testimonial::orderBy('id','desc')->get();
+        $testimonials=Testimonial::orderBy('deleted_at','desc')->get();
 
         return Inertia('Admin/Testimony/Index',[
-            'testimonial'=> $testimonial,
+            'testimonials'=> $testimonials,
             
         ]);////   //
     }
@@ -51,6 +51,8 @@ class TestimonialController extends Controller
      */
     public function show(Testimonial $testimonial)
     {
+           $testimonial=Testimonial::withTrashed()->orderBy('deleted_at','desc')->get();
+
         return Inertia('Admin/Testimony/Detail',[
             'testimonial'=> $testimonial,
             

@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[FrontController::class,'index'])->name('front.index');
 
-Route::get('/testimony',[TestimonialController::class, 'create'])->name('front.testimony');
+Route::get('/testimony',[FrontController::class, 'testi'])->name('front.testimony');
  Route::post('/testimony/save', [TestimonialController::class, 'store'])->name('front.testimony.store');
 
 Route::get('/book',[FrontController::class, 'book'])->name('front.book');
@@ -46,7 +46,7 @@ Route::middleware('auth')->prefix('dashboard')->name('admin.dashboard.')->group(
     Route::put('tool/{tool}/restore', [ToolController::class,'restore'])->name('tool.restore');
 
     Route::resource('project_order', ProjectOrderController::class);
-    Route::resource('testimony', TestimonialController::class);
+    Route::resource('testimonial', TestimonialController::class);
 
   /*   Route::delete('/project-tools/{id}', [ProjectToolController::class, 'destroy'])->name('project-tools.destroy'); */
     Route::resource('projecttool', ProjectToolController::class);

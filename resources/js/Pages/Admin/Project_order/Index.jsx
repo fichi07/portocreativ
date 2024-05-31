@@ -2,11 +2,22 @@ import Authenticated from "@/Layouts/Template/Index";
 import TopbarAdmin from "@/Layouts/Template/TopbarAdmin";
 import PrimaryButton from "@/Components/PrimaryButton";
 import FlashMessage from "@/Components/FlashMessage";
-import { Link, Head, useForm } from "@inertiajs/react";
-import React from "react";
+import Modal from "@/Components/Modal";
+import { Head } from "@inertiajs/react";
+import React, { useState } from "react";
 
 export default function Index({ auth, flashMessage, projectOrder }) {
-    const { delete: destroy, put } = useForm();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedProjectOrder, setSelectedProjectOrder] = useState(null);
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedProjectOrder(null);
+    };
+    const openModal = (order) => {
+        setSelectedProjectOrder(order);
+        setIsModalOpen(true);
+    };
     return (
         <>
             <Authenticated>
@@ -41,20 +52,14 @@ export default function Index({ auth, flashMessage, projectOrder }) {
                                         </div>
 
                                         <div className="flex flex-row items-center w-auto gap-x-2">
-                                            <Link
-                                                href={route(
-                                                    "admin.dashboard.project_order.show",
-                                                    order.id
-                                                )}
+                                            <PrimaryButton
+                                                type="button"
+                                                onClick={() => openModal(order)}
+                                                variant="details"
+                                                className="py-3 px-5 rounded-full"
                                             >
-                                                <PrimaryButton
-                                                    type="button"
-                                                    variant="details"
-                                                    className="py-3 px-5 rounded-full"
-                                                >
-                                                    View Details
-                                                </PrimaryButton>
-                                            </Link>
+                                                View Details
+                                            </PrimaryButton>
                                         </div>
                                     </div>
                                 </div>
@@ -63,6 +68,38 @@ export default function Index({ auth, flashMessage, projectOrder }) {
                     </div>
                 </div>
             </Authenticated>
+            {selectedProjectOrder && (
+                <Modal show={isModalOpen} onClose={closeModal} maxWidth="2xl">
+                    <div className="p-6">
+                        <h1 className="text-indigo-950 text-3xl font-bold ">
+                            {selectedProjectOrder.name}
+                        </h1>{" "}
+                        <div className="flex flex-row items-center gap-x-5">
+                            <div className="flex flex-col gap-y-2">
+                                <h3 className="text-indigo-950 font-regular text-xl">
+                                    {selectedProjectOrder.email}
+                                </h3>
+                            </div>
+                        </div>
+                        <hr className="my-2" />
+                        <div className="flex flex-col gap-y-1">
+                            <p className="text-sm text-slate-400">
+                                {selectedProjectOrder.category}
+                            </p>
+                            <p className="text-sm text-slate-400">
+                                Budget: ${selectedProjectOrder.budget}
+                            </p>
+                        </div>
+                        <hr className="my-5" />
+                        <h2 className="text-indigo-950 font-bold text-lg">
+                            Brief
+                        </h2>
+                        <p className="text-indigo-950">
+                            {selectedProjectOrder.brief}
+                        </p>
+                    </div>
+                </Modal>
+            )}
         </>
     );
 }

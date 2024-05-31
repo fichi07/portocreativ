@@ -40,7 +40,7 @@ export default function Book() {
                     id="Content"
                     className="bg-portto-black flex min-h-screen"
                 >
-                    <div className="w-[660px] min-h-screen flex flex-col p-[30px_40px] justify-end overflow-hidden bg-[url('images/background/side-image.png')] bg-cover bg-center bg-no-repeat">
+                    <div className="w-[660px] items-center min-h-screen flex flex-col p-[30px_40px] justify-center overflow-hidden bg-[url('images/background/side-image.png')] bg-cover bg-center bg-no-repeat">
                         <div className="flex flex-col bg-white p-[30px] gap-5 rounded-[30px] w-[580px]">
                             <div className="flex h-10 items-start overflow-hidden">
                                 <img

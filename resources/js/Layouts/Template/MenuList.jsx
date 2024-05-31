@@ -16,7 +16,7 @@ const ListMenu = [
         text: "Orders",
     },
     {
-        link: "admin.dashboard.testimony.index",
+        link: "admin.dashboard.testimonial.index",
         text: "Testimony",
     },
 ];

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Http\Requests\Front\Store;
 use App\Models\ProjectOrder;
+use App\Models\Testimonial;
 
 class FrontController extends Controller
 {
@@ -31,7 +32,14 @@ class FrontController extends Controller
      public function Book(){
     return Inertia('Front/Book');
     }//
-    
+    public function Testi(){
+    $testimonials=Testimonial::orderBy('deleted_at','desc')->get();
+
+        return Inertia('Front/Testimony',[
+            'testimonials'=> $testimonials,
+            
+        ]);
+    }
     public function store(Store $request){
         $data = $request->validated();
       

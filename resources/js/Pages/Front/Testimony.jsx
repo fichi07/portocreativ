@@ -8,7 +8,7 @@ import { Head } from "@inertiajs/react";
 import { useForm } from "@inertiajs/inertia-react";
 import React, { useState, useEffect } from "react";
 import Authenticated from "@/Layouts/Template/Index";
-export default function Book({ flashMessage, testimonial }) {
+export default function Testimony({ flashMessage, testimonials }) {
     const { setData, post, processing, errors } = useForm({
         name: "",
         role: "",
@@ -40,7 +40,7 @@ export default function Book({ flashMessage, testimonial }) {
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentCard(
-                (currentCard) => (currentCard + 1) % testimonial.length
+                (currentCard) => (currentCard + 1) % testimonials.length
             );
         }, 5000); // rotates every 5 seconds
 
@@ -76,21 +76,21 @@ export default function Book({ flashMessage, testimonial }) {
                         >
                             <div className="flex h-10 items-center overflow-hidden">
                                 <img
-                                    src={`/storage/${testimonial[currentCard].logo}`}
+                                    src={`/storage/${testimonials[currentCard].logo}`}
                                     className="h-full w-fit object-contain"
                                     alt="logo"
                                 />
                                 <p className="text-sm items-center text-slate-400">
-                                    {testimonial[currentCard].role}
+                                    {testimonials[currentCard].role}
                                 </p>
                             </div>
 
                             <p className="font-semibold text-[22px]  leading-[40px]">
-                                {testimonial[currentCard].testimony}
+                                {testimonials[currentCard].testimony}
                             </p>
                             <div className="flex h-8 w-fit shrink-0">
                                 {Array.from(
-                                    { length: testimonial[currentCard].rate },
+                                    { length: testimonials[currentCard].rate },
                                     (_, i) => (
                                         <img
                                             key={i}
